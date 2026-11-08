@@ -1,0 +1,161 @@
+{
+  "sample_size": 329,
+  "overall": {
+    "correct": 0,
+    "incorrect": 0,
+    "uncertain": 0,
+    "pending": 329
+  },
+  "edge_precision_percent": null,
+  "target_percent_exclusive_minimum": 90,
+  "acceptance": false,
+  "by_relationship_type": {
+    "ACTED_IN": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 30,
+      "precision_percent": null
+    },
+    "ANIMATED": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 30,
+      "precision_percent": null
+    },
+    "ART_DIRECTED": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 2,
+      "precision_percent": null
+    },
+    "ASSISTANT_DIRECTED": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 3,
+      "precision_percent": null
+    },
+    "BROADCAST_BY": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 9,
+      "precision_percent": null
+    },
+    "CINEMATOGRAPHED": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 10,
+      "precision_percent": null
+    },
+    "COMPOSED_MUSIC_FOR": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 16,
+      "precision_percent": null
+    },
+    "COSTUME_DESIGNED": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 2,
+      "precision_percent": null
+    },
+    "DIRECTED": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 30,
+      "precision_percent": null
+    },
+    "DISTRIBUTED_BY": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 25,
+      "precision_percent": null
+    },
+    "EDITED": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 13,
+      "precision_percent": null
+    },
+    "EXECUTIVE_PRODUCED": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 3,
+      "precision_percent": null
+    },
+    "NARRATED": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 4,
+      "precision_percent": null
+    },
+    "OTHER_CREW_ROLE": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 30,
+      "precision_percent": null
+    },
+    "PRODUCED": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 21,
+      "precision_percent": null
+    },
+    "PRODUCED_BY": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 24,
+      "precision_percent": null
+    },
+    "PRODUCTION_DESIGNED": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 2,
+      "precision_percent": null
+    },
+    "SOUND_DESIGNED": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 4,
+      "precision_percent": null
+    },
+    "STORYBOARDED": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 11,
+      "precision_percent": null
+    },
+    "VOICE_ACTED_IN": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 30,
+      "precision_percent": null
+    },
+    "WROTE": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 0,
+      "pending": 30,
+      "precision_percent": null
+    }
+  }
+}

@@ -1,0 +1,44 @@
+project:
+  name: Vietnam Film Network
+  version: 0.3.0
+collection:
+  batch_size: 50
+  request_timeout_seconds: 45
+  request_delay_seconds: 1.5
+  max_retries: 5
+  maxlag_seconds: 5
+  wikipedia_extract_chars: 12000
+  wikidata_credit_row_limit: 1000
+  year_start: 1900
+  year_end: 2026
+  wikidata_seed_page_size: 250
+  wikidata_credit_batch_size: 100
+  wikidata_credit_row_limit_per_batch: 5000
+  wikidata_credit_delay_seconds: 6.0
+  wikipedia_expansion_limit: 50
+sources:
+  wikipedia:
+    vi_api: https://vi.wikipedia.org/w/api.php
+    en_api: https://en.wikipedia.org/w/api.php
+  wikidata:
+    sparql_endpoint: https://query.wikidata.org/sparql
+    country_qid: Q881
+    work_type_qids:
+    - Q11424
+    - Q5398426
+    - Q506240
+    - Q24862
+    - Q581714
+    - Q15416
+paths:
+  raw_wikipedia: data/raw/wikipedia
+  raw_wikidata: data/raw/wikidata
+  processed: data/processed
+  checkpoints: data/checkpoints
+  reports: reports
+  logs: logs
+targets:
+  core_nodes: 4000
+  valid_edges: 10000
+  populated_relationship_types: 20
+  edge_precision_percent_exclusive_min: 90

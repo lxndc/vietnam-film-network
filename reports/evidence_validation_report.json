@@ -1,0 +1,41 @@
+{
+  "stage": "wikidata_statement_and_reference_audit_v1",
+  "generated_at": "2026-11-06T20:41:00+00:00",
+  "inputs": {
+    "resolved_edge_candidates": 5568,
+    "relation_review_rows": 8223,
+    "unique_work_qids_requested": 705,
+    "work_qids_cached_or_fetched": 705
+  },
+  "edge_audit": {
+    "total_edges_audited": 5568,
+    "status_counts": {
+      "statement_matched_unreferenced": 2818,
+      "statement_matched_publication_reference_needs_source_lookup": 919,
+      "statement_matched_reference_url_needs_source_review": 580,
+      "statement_matched_imported_from_only_needs_review": 1180,
+      "statement_matched_other_reference_needs_review": 68,
+      "deprecated_statement_only_needs_review": 3
+    },
+    "edges_with_statement_reference_urls": 580,
+    "edges_with_publication_item_references": 983,
+    "edges_without_any_statement_match": 0,
+    "candidate_mappings_unmatched_or_invalid": 0,
+    "reference_records_extracted": 3645
+  },
+  "outputs": {
+    "directory": "data/evidence_validation/v1",
+    "edge_status_csv": "data/evidence_validation/v1/edge_evidence_status.csv",
+    "references_csv": "data/evidence_validation/v1/evidence_references.csv",
+    "statement_audit_jsonl": "data/evidence_validation/v1/statement_audit.jsonl",
+    "unmatched_csv": "data/evidence_validation/v1/unmatched_statement_candidates.csv",
+    "claim_cache": "data/raw/wikidata/statement_audit_cache"
+  },
+  "important": [
+    "A matching Wikidata statement is not by itself proof that the real-world claim is accurate.",
+    "P854 URLs and P248 publication items are extracted for source review; they are not auto-approved.",
+    "P143 imported-from references are not treated as independent evidence.",
+    "No Edge is assigned verification_status=verified by this stage.",
+    "Original review CSVs and Entity Resolution outputs are not modified."
+  ]
+}

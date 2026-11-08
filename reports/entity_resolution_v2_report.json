@@ -1,0 +1,79 @@
+{
+  "stage": "entity_resolution_v1",
+  "generated_at": "2026-11-06T20:22:27+00:00",
+  "inputs": {
+    "work_review_rows": 1537,
+    "entity_review_rows": 5041,
+    "relation_review_rows": 8223,
+    "review_decisions": {
+      "work": {
+        "correct": 1537
+      },
+      "entity": {
+        "correct": 5041
+      },
+      "relation": {
+        "correct": 8223
+      }
+    },
+    "approved_candidates_used": {
+      "work": 1537,
+      "entity": 5041,
+      "relation": 8223
+    }
+  },
+  "node_resolution": {
+    "input_approved_candidates": 6578,
+    "canonical_nodes": 5820,
+    "nodes_by_label": {
+      "Organization": 556,
+      "Person": 4048,
+      "Work": 1216
+    },
+    "candidate_groups_merged_by_qid": 660,
+    "candidates_without_qid_kept_separate": 69,
+    "possible_duplicate_name_groups": 22,
+    "qid_type_conflicts": 0
+  },
+  "edge_resolution": {
+    "approved_relation_candidates": 8223,
+    "resolved_deduplicated_edge_candidates": 5568,
+    "unresolved_relation_candidates": 160,
+    "candidates_without_statement_reference_urls": 7706,
+    "edges_by_relationship_type": {
+      "ACTED_IN": 2987,
+      "PRODUCED": 194,
+      "DIRECTED": 493,
+      "WROTE": 295,
+      "DISTRIBUTED_BY": 281,
+      "COMPOSED_MUSIC_FOR": 201,
+      "PRODUCED_BY": 274,
+      "EDITED": 72,
+      "CINEMATOGRAPHED": 143,
+      "BROADCAST_BY": 173,
+      "PRODUCTION_DESIGNED": 19,
+      "COSTUME_DESIGNED": 8,
+      "SOUND_DESIGNED": 12,
+      "VOICE_ACTED_IN": 198,
+      "EXECUTIVE_PRODUCED": 39,
+      "NARRATED": 8,
+      "ASSISTANT_DIRECTED": 3,
+      "OTHER_CREW_ROLE": 87,
+      "ART_DIRECTED": 3,
+      "ANIMATED": 44,
+      "STORYBOARDED": 11,
+      "RECORDED_PARTICIPANT_IN": 22,
+      "SCENOGRAPHED": 1
+    },
+    "all_resolved_edges_need_evidence_validation": true
+  },
+  "output_directory": "data/resolution/entity_resolution_v2",
+  "previous_output_backup": null,
+  "important": [
+    "Exact same-type Wikidata QID is the only automatic merge key.",
+    "Candidates without QID are kept separate; same-name groups are review flags only.",
+    "Resolved edges remain needs_evidence_validation and are not production graph edges.",
+    "Wikidata item URLs are traceability links, not equivalent to statement reference URLs.",
+    "No precision claim is made by this script."
+  ]
+}

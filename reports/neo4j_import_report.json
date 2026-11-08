@@ -1,0 +1,32 @@
+{
+  "dataset_status": "staging",
+  "export_nodes": 1525,
+  "export_edges": 1499,
+  "database_nodes": 1525,
+  "database_edges": 1499,
+  "relationship_types": {
+    "DISTRIBUTED_BY": 25,
+    "PRODUCED": 21,
+    "DIRECTED": 129,
+    "WROTE": 43,
+    "COMPOSED_MUSIC_FOR": 16,
+    "PRODUCED_BY": 24,
+    "EDITED": 13,
+    "CINEMATOGRAPHED": 10,
+    "SOUND_DESIGNED": 4,
+    "ACTED_IN": 934,
+    "EXECUTIVE_PRODUCED": 3,
+    "BROADCAST_BY": 9,
+    "ASSISTANT_DIRECTED": 3,
+    "OTHER_CREW_ROLE": 87,
+    "COSTUME_DESIGNED": 2,
+    "PRODUCTION_DESIGNED": 2,
+    "VOICE_ACTED_IN": 113,
+    "ART_DIRECTED": 2,
+    "ANIMATED": 44,
+    "NARRATED": 4,
+    "STORYBOARDED": 11
+  },
+  "node_count_matches": true,
+  "edge_count_matches": true
+}

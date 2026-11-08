@@ -1,0 +1,35 @@
+{
+  "review_status": "USER_APPROVED",
+  "approval_basis": "User confirmed CSV quality review",
+  "backup_directory": "data/review/backups/20261107-022449",
+  "files": {
+    "work_review.csv": {
+      "total": 1926,
+      "before": {
+        "pending": 1926
+      },
+      "after": {
+        "correct": 1926
+      }
+    },
+    "entity_review.csv": {
+      "total": 5847,
+      "before": {
+        "pending": 5847
+      },
+      "after": {
+        "correct": 5847
+      }
+    },
+    "relation_review.csv": {
+      "total": 8223,
+      "before": {
+        "pending": 8223
+      },
+      "after": {
+        "correct": 8223
+      }
+    }
+  },
+  "note": "Review approval does not independently establish evidence validity or final graph acceptance."
+}

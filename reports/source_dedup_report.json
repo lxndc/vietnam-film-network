@@ -1,0 +1,40 @@
+{
+  "stage": "source_deduplication_v1",
+  "input_source_review_tasks": 2159,
+  "unique_edge_ids_in_source_queue": 1499,
+  "unique_source_assets": 322,
+  "deduplication_reduction": 1837,
+  "source_asset_reduction_percent": 85.09,
+  "edge_source_mappings_preserved": 2159,
+  "unique_edge_asset_pairs": 2157,
+  "source_assets_reused_by_multiple_edges": 159,
+  "input_tasks_by_kind": {
+    "P248_publication_item": 1189,
+    "P854_reference_url": 970
+  },
+  "edges_without_p854_or_p248_source": 4069,
+  "p143_provenance_rows_kept_separate": 1512,
+  "unknown_source_kind_rows": 0,
+  "integrity_checks": {
+    "all_source_review_tasks_mapped": true,
+    "no_edge_source_mapping_dropped": true,
+    "source_independence_auto_assigned": false,
+    "all_edge_support_reviews_pending": true
+  },
+  "outputs": {
+    "source_assets": "/home/dducky/projects/vietnam-film-network/vietnam-film-network/data/evidence_validation/v3_source_dedup/source_assets.csv",
+    "source_edge_map": "/home/dducky/projects/vietnam-film-network/vietnam-film-network/data/evidence_validation/v3_source_dedup/source_edge_map.csv",
+    "edge_source_support_review": "/home/dducky/projects/vietnam-film-network/vietnam-film-network/data/evidence_validation/v3_source_dedup/edge_source_support_review.csv",
+    "source_independence": "/home/dducky/projects/vietnam-film-network/vietnam-film-network/data/evidence_validation/v3_source_dedup/source_independence.csv"
+  },
+  "important": [
+    "Deduplication applies to source assets only; all task-to-edge mappings are preserved.",
+    "Different paths on the same domain are not merged.",
+    "HTTP and HTTPS are not merged automatically.",
+    "Only known tracking parameters and URL fragments are removed.",
+    "P248 is keyed by publication QID.",
+    "P143 provenance remains separate and is not treated as evidence.",
+    "Source independence is left unassessed.",
+    "No URLs are fetched and no Edge is marked verified."
+  ]
+}

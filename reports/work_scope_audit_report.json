@@ -1,0 +1,11 @@
+{
+  "total_work_qids": 705,
+  "work_items_fetched": 705,
+  "scope_suggestions": {
+    "foreign_candidate": 211,
+    "vietnam_candidate": 439,
+    "coproduction_candidate": 39,
+    "scope_uncertain": 16
+  },
+  "output": "/home/dducky/projects/vietnam-film-network/vietnam-film-network/data/evidence_validation/v3_scope/work_scope_audit.csv"
+}

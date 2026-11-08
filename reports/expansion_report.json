@@ -1,0 +1,31 @@
+{
+  "started_at": "2026-11-07T21:21:50+00:00",
+  "finished_at": "2026-11-07T21:23:06+00:00",
+  "targets": {
+    "core_nodes": 4000,
+    "valid_edges": 10000,
+    "populated_relationship_types": 20,
+    "edge_precision_percent_exclusive_min": 90
+  },
+  "collection_parameters": {
+    "sources": "all",
+    "max_works": 10000,
+    "work_page_size": 250,
+    "wikipedia_limit_per_query": 100,
+    "credit_batch_size": 100,
+    "credit_row_limit_per_batch": 5000
+  },
+  "tasks_run_this_session": [
+    "expanded:v3:wikidata:work-seeds:offset750:limit250"
+  ],
+  "candidate_counts": {
+    "work_candidates": 1926,
+    "person_organization_candidates": 5847,
+    "relation_candidates": 8223,
+    "wikidata_work_seeds_selected": 593,
+    "wikipedia_work_qids_for_credits": 1200,
+    "unique_work_qids_for_credits_selected": 1524,
+    "wikidata_credit_candidates_total": 8223
+  },
+  "note": "Candidate totals are not verified Core Nodes or valid Edges. Only manually reviewed, evidence-backed and deduplicated graph records count toward acceptance."
+}

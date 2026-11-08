@@ -1,0 +1,29 @@
+{
+  "stage": "qid_type_conflict_resolution_suggestions_v1",
+  "generated_at": "2026-11-06T20:14:47.322201+00:00",
+  "input_conflicting_qids": 688,
+  "qid_decisions": {
+    "AUTO_RESOLVED_BY_WIKIDATA_P31_P279": 559,
+    "MANUAL_REVIEW_NO_SUPPORTED_CLASS_MATCH": 129
+  },
+  "candidate_row_actions": {
+    "kept_matching_wikidata_type": 890,
+    "kept_not_in_conflict_list": 5688,
+    "quarantined_manual_review": 361,
+    "quarantined_type_mismatch": 834
+  },
+  "original_csvs_modified": false,
+  "output_directory": "data/resolution/type_resolved_review",
+  "rules": {
+    "Person": "P31/P279* reaches human (Q5)",
+    "Work": "P31/P279* reaches film (Q11424), television series (Q5398426), or television film (Q506240)",
+    "Organization": "P31/P279* reaches organization (Q43229)"
+  },
+  "important": [
+    "Only unique Wikidata class matches are automatically suggested.",
+    "No-match and multi-match QIDs are quarantined for manual review.",
+    "Candidate rows with a type that conflicts with Wikidata are quarantined, not deleted.",
+    "Original approved review CSVs are never overwritten.",
+    "These are classification suggestions; they do not prove relation evidence or graph acceptance."
+  ]
+}

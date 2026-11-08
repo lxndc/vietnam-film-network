@@ -1,0 +1,189 @@
+wikipedia:
+  vi:
+  - id: vi_vietnamese_feature_films
+    query: phim điện ảnh Việt Nam
+    scope: work
+  - id: vi_vietnamese_television_series
+    query: phim truyền hình Việt Nam
+    scope: work
+  - id: vi_vietnamese_film_directors
+    query: đạo diễn phim Việt Nam
+    scope: person
+  - id: vi_vietnamese_film_production_companies
+    query: hãng phim Việt Nam
+    scope: organization
+  - id: vi_exp_all_vietnam_films
+    query: phim Việt Nam
+    scope: work
+  - id: vi_exp_vietnamese_cinema
+    query: điện ảnh Việt Nam
+    scope: work
+  - id: vi_exp_vietnamese_feature_movies
+    query: phim truyện Việt Nam
+    scope: work
+  - id: vi_exp_vietnamese_short_films
+    query: phim ngắn Việt Nam
+    scope: work
+  - id: vi_exp_vietnam_tv_drama
+    query: phim bộ Việt Nam
+    scope: work
+  - id: vi_exp_vietnamese_documentary_films
+    query: phim tài liệu Việt Nam
+    scope: work
+  - id: vi_exp_vietnamese_animation
+    query: phim hoạt hình Việt Nam
+    scope: work
+  - id: vi_exp_vietnamese_historical_films
+    query: phim lịch sử Việt Nam
+    scope: work
+  - id: vi_exp_vietnamese_war_films
+    query: phim chiến tranh Việt Nam
+    scope: work
+  - id: vi_exp_vietnamese_comedy_films
+    query: phim hài Việt Nam
+    scope: work
+  - id: vi_exp_vietnamese_film_lists
+    query: danh sách phim Việt Nam
+    scope: index
+  - id: vi_exp_filmography_vietnam
+    query: danh sách phim điện ảnh Việt Nam theo năm
+    scope: index
+  - id: vi_exp_film_actors
+    query: diễn viên điện ảnh Việt Nam
+    scope: person
+  - id: vi_exp_tv_actors
+    query: diễn viên truyền hình Việt Nam
+    scope: person
+  - id: vi_exp_vietnamese_actors
+    query: diễn viên Việt Nam
+    scope: person
+  - id: vi_exp_film_directors
+    query: đạo diễn điện ảnh Việt Nam
+    scope: person
+  - id: vi_exp_tv_directors
+    query: đạo diễn truyền hình Việt Nam
+    scope: person
+  - id: vi_exp_film_producers
+    query: nhà sản xuất phim Việt Nam
+    scope: person
+  - id: vi_exp_screenwriters
+    query: nhà biên kịch Việt Nam
+    scope: person
+  - id: vi_exp_cinematographers
+    query: nhà quay phim Việt Nam
+    scope: person
+  - id: vi_exp_film_editors
+    query: dựng phim Việt Nam
+    scope: person
+  - id: vi_exp_film_composers
+    query: nhạc sĩ phim Việt Nam
+    scope: person
+  - id: vi_exp_production_designers
+    query: họa sĩ thiết kế mỹ thuật phim Việt Nam
+    scope: person
+  - id: vi_exp_film_companies
+    query: công ty sản xuất phim Việt Nam
+    scope: organization
+  - id: vi_exp_state_film_companies
+    query: hãng phim nhà nước Việt Nam
+    scope: organization
+  - id: vi_exp_private_film_companies
+    query: hãng phim tư nhân Việt Nam
+    scope: organization
+  - id: vi_exp_broadcasters
+    query: đài truyền hình Việt Nam
+    scope: organization
+  - id: vi_exp_distributors
+    query: đơn vị phát hành phim Việt Nam
+    scope: organization
+  en:
+  - id: en_vietnamese_films
+    query: Vietnamese films
+    scope: work
+  - id: en_vietnamese_television_series
+    query: Vietnamese television series
+    scope: work
+  - id: en_vietnamese_film_directors
+    query: Vietnamese film directors
+    scope: person
+  - id: en_vietnamese_film_production_companies
+    query: Vietnamese film production companies
+    scope: organization
+  - id: en_exp_vietnamese_cinema
+    query: cinema of Vietnam films
+    scope: work
+  - id: en_exp_vietnamese_feature_films
+    query: Vietnamese feature films
+    scope: work
+  - id: en_exp_vietnamese_short_films
+    query: Vietnamese short films
+    scope: work
+  - id: en_exp_vietnamese_tv_drama
+    query: Vietnamese television drama series
+    scope: work
+  - id: en_exp_vietnamese_documentaries
+    query: Vietnamese documentary films
+    scope: work
+  - id: en_exp_vietnamese_animated_films
+    query: Vietnamese animated films
+    scope: work
+  - id: en_exp_vietnamese_historical_films
+    query: Vietnamese historical films
+    scope: work
+  - id: en_exp_vietnamese_war_films
+    query: Vietnamese war films
+    scope: work
+  - id: en_exp_vietnamese_comedy_films
+    query: Vietnamese comedy films
+    scope: work
+  - id: en_exp_film_lists
+    query: list of Vietnamese films by year
+    scope: index
+  - id: en_exp_vietnamese_actor_filmographies
+    query: Vietnamese actors filmography
+    scope: person
+  - id: en_exp_film_actors
+    query: Vietnamese film actors
+    scope: person
+  - id: en_exp_tv_actors
+    query: Vietnamese television actors
+    scope: person
+  - id: en_exp_film_directors
+    query: Vietnamese film directors
+    scope: person
+  - id: en_exp_tv_directors
+    query: Vietnamese television directors
+    scope: person
+  - id: en_exp_film_producers
+    query: Vietnamese film producers
+    scope: person
+  - id: en_exp_screenwriters
+    query: Vietnamese screenwriters
+    scope: person
+  - id: en_exp_cinematographers
+    query: Vietnamese cinematographers Vietnam
+    scope: person
+  - id: en_exp_film_editors
+    query: Vietnamese film editors
+    scope: person
+  - id: en_exp_film_composers
+    query: Vietnamese film composers
+    scope: person
+  - id: en_exp_production_designers
+    query: Vietnamese production designers film
+    scope: person
+  - id: en_exp_film_companies
+    query: Vietnamese film production companies
+    scope: organization
+  - id: en_exp_state_studios
+    query: Vietnamese state film studios
+    scope: organization
+  - id: en_exp_private_studios
+    query: Vietnamese independent film studios
+    scope: organization
+  - id: en_exp_broadcasters
+    query: Vietnamese television broadcasters
+    scope: organization
+  - id: en_exp_distributors
+    query: Vietnamese film distributors
+    scope: organization

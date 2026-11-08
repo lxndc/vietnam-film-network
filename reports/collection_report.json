@@ -1,0 +1,16 @@
+{
+  "started_at": "2026-11-06T18:05:40+00:00",
+  "finished_at": "2026-11-06T18:07:52+00:00",
+  "batch_limit_per_search": 50,
+  "tasks_run_this_session": [
+    "wikidata:work_seeds",
+    "wikidata:credits"
+  ],
+  "raw_counts": {
+    "wikipedia_search_matches": 400,
+    "wikipedia_pages": 337,
+    "wikidata_work_seeds": 50,
+    "wikidata_credit_candidates": 232
+  },
+  "note": "Đây là số liệu thu thập thô/ứng viên, không phải số Node hoặc Edge đã xác minh."
+}

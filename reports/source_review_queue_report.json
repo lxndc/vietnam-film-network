@@ -1,0 +1,24 @@
+{
+  "stage": "source_review_queue_v1",
+  "inventory_reference_rows": 3645,
+  "edge_status_rows": 5568,
+  "source_review_tasks": 2159,
+  "p854_url_tasks": 970,
+  "p248_publication_item_tasks": 1189,
+  "unique_edges_with_p854_or_p248": 1499,
+  "edges_requiring_independent_source_search": 4069,
+  "p143_provenance_records": 1512,
+  "outputs": {
+    "source_review_queue": "/home/dducky/projects/vietnam-film-network/vietnam-film-network/data/evidence_validation/v2/source_review_queue.csv",
+    "edge_source_gap_queue": "/home/dducky/projects/vietnam-film-network/vietnam-film-network/data/evidence_validation/v2/edge_source_gap_queue.csv",
+    "import_provenance_only": "/home/dducky/projects/vietnam-film-network/vietnam-film-network/data/evidence_validation/v2/import_provenance_only.csv"
+  },
+  "important": [
+    "All review decisions start as pending.",
+    "A P854 URL must be opened and checked for support of the exact edge.",
+    "A P248 item must be resolved to the actual publication and checked.",
+    "P143 is provenance only and is not counted as independent evidence.",
+    "An edge with no P854/P248 is queued for independent source search.",
+    "No edge is marked verified by this script."
+  ]
+}

@@ -1,0 +1,351 @@
+{
+  "stage": "source_inventory_v1",
+  "input": "/home/dducky/projects/vietnam-film-network/vietnam-film-network/data/evidence_validation/v1/evidence_references.csv",
+  "total_reference_records": 3645,
+  "records_with_p854_urls": 962,
+  "records_with_p248_stated_in": 1189,
+  "records_with_p143_imported_from": 1512,
+  "records_with_any_source_marker": 3638,
+  "rows_with_no_source_marker": 7,
+  "reference_fields_parse_warnings": 0,
+  "unique_domains": 61,
+  "top_domains": [
+    {
+      "domain": "imdb.com",
+      "reference_record_count": 442
+    },
+    {
+      "domain": "allocine.fr",
+      "reference_record_count": 70
+    },
+    {
+      "domain": "stopklatka.pl",
+      "reference_record_count": 61
+    },
+    {
+      "domain": "filmaffinity.com",
+      "reference_record_count": 57
+    },
+    {
+      "domain": "bbfc.co.uk",
+      "reference_record_count": 45
+    },
+    {
+      "domain": "ofdb.de",
+      "reference_record_count": 41
+    },
+    {
+      "domain": "cinematografo.it",
+      "reference_record_count": 25
+    },
+    {
+      "domain": "filmow.com",
+      "reference_record_count": 22
+    },
+    {
+      "domain": "radiotimes.com",
+      "reference_record_count": 21
+    },
+    {
+      "domain": "metacritic.com",
+      "reference_record_count": 20
+    },
+    {
+      "domain": "moveek.com",
+      "reference_record_count": 18
+    },
+    {
+      "domain": "adorocinema.com",
+      "reference_record_count": 18
+    },
+    {
+      "domain": "f3m.ca",
+      "reference_record_count": 15
+    },
+    {
+      "domain": "interfilmes.com",
+      "reference_record_count": 14
+    },
+    {
+      "domain": "media.netflix.com",
+      "reference_record_count": 9
+    },
+    {
+      "domain": "fotogramas.es",
+      "reference_record_count": 7
+    },
+    {
+      "domain": "afilmla.blogspot.de",
+      "reference_record_count": 7
+    },
+    {
+      "domain": "virtual-history.com",
+      "reference_record_count": 6
+    },
+    {
+      "domain": "beyazperde.com",
+      "reference_record_count": 5
+    },
+    {
+      "domain": "fandango.com",
+      "reference_record_count": 4
+    }
+  ],
+  "top_stated_in_qids": [
+    {
+      "qid": "Q3561957",
+      "reference_record_count": 572
+    },
+    {
+      "qid": "Q270470",
+      "reference_record_count": 96
+    },
+    {
+      "qid": "Q27915497",
+      "reference_record_count": 94
+    },
+    {
+      "qid": "Q28381910",
+      "reference_record_count": 88
+    },
+    {
+      "qid": "Q28381380",
+      "reference_record_count": 71
+    },
+    {
+      "qid": "Q31165",
+      "reference_record_count": 42
+    },
+    {
+      "qid": "Q37312",
+      "reference_record_count": 40
+    },
+    {
+      "qid": "Q41001657",
+      "reference_record_count": 21
+    },
+    {
+      "qid": "Q15241312",
+      "reference_record_count": 20
+    },
+    {
+      "qid": "Q20828898",
+      "reference_record_count": 18
+    },
+    {
+      "qid": "Q29624854",
+      "reference_record_count": 18
+    },
+    {
+      "qid": "Q139694907",
+      "reference_record_count": 14
+    },
+    {
+      "qid": "Q4834894",
+      "reference_record_count": 12
+    },
+    {
+      "qid": "Q150248",
+      "reference_record_count": 9
+    },
+    {
+      "qid": "Q55738549",
+      "reference_record_count": 9
+    },
+    {
+      "qid": "Q15706812",
+      "reference_record_count": 8
+    },
+    {
+      "qid": "Q1669874",
+      "reference_record_count": 7
+    },
+    {
+      "qid": "Q27048505",
+      "reference_record_count": 5
+    },
+    {
+      "qid": "Q2638147",
+      "reference_record_count": 4
+    },
+    {
+      "qid": "Q99587855",
+      "reference_record_count": 4
+    }
+  ],
+  "top_imported_from_qids": [
+    {
+      "qid": "Q328",
+      "reference_record_count": 825
+    },
+    {
+      "qid": "Q11920",
+      "reference_record_count": 228
+    },
+    {
+      "qid": "Q8447",
+      "reference_record_count": 169
+    },
+    {
+      "qid": "Q200180",
+      "reference_record_count": 86
+    },
+    {
+      "qid": "Q206855",
+      "reference_record_count": 74
+    },
+    {
+      "qid": "Q48183",
+      "reference_record_count": 67
+    },
+    {
+      "qid": "Q10000",
+      "reference_record_count": 13
+    },
+    {
+      "qid": "Q11921",
+      "reference_record_count": 8
+    },
+    {
+      "qid": "Q8449",
+      "reference_record_count": 7
+    },
+    {
+      "qid": "Q1590879",
+      "reference_record_count": 6
+    },
+    {
+      "qid": "Q24469969",
+      "reference_record_count": 6
+    },
+    {
+      "qid": "Q877583",
+      "reference_record_count": 5
+    },
+    {
+      "qid": "Q17985",
+      "reference_record_count": 4
+    },
+    {
+      "qid": "Q191168",
+      "reference_record_count": 4
+    },
+    {
+      "qid": "Q1551807",
+      "reference_record_count": 4
+    },
+    {
+      "qid": "Q844491",
+      "reference_record_count": 1
+    },
+    {
+      "qid": "Q175482",
+      "reference_record_count": 1
+    },
+    {
+      "qid": "Q191769",
+      "reference_record_count": 1
+    },
+    {
+      "qid": "Q53464",
+      "reference_record_count": 1
+    },
+    {
+      "qid": "Q58255",
+      "reference_record_count": 1
+    }
+  ],
+  "top_source_titles": [
+    {
+      "title": "Inside No. 9 legend confirmed to join David Tennant in starry ITV drama | Radio Times",
+      "reference_record_count": 21
+    },
+    {
+      "title": "Maika",
+      "reference_record_count": 11
+    },
+    {
+      "title": "O Ataque dos Vermes Malditos",
+      "reference_record_count": 6
+    },
+    {
+      "title": "Star Trek - Star Trek (1966) - Film serial - CineMagia.ro",
+      "reference_record_count": 3
+    },
+    {
+      "title": "Im Land der Raketen-Würmer",
+      "reference_record_count": 3
+    },
+    {
+      "title": "Star Trek (Serie TV 1966 - 1969): trama, cast, foto, news - Movieplayer.it",
+      "reference_record_count": 2
+    },
+    {
+      "title": "Tremors (1990). Full Cast & Crew",
+      "reference_record_count": 2
+    },
+    {
+      "title": "Wstrząsy (1990)",
+      "reference_record_count": 2
+    },
+    {
+      "title": "Star Trek | Cast, Characters, Synopsis, & Facts | Britannica",
+      "reference_record_count": 1
+    },
+    {
+      "title": "'작은 아씨들' 정서경 작가, “자매들의 싸움 본격화, 자신만의 방식으로 도달할 것”",
+      "reference_record_count": 1
+    },
+    {
+      "title": "Hanna-Barbera Veteran Gerard Baldwin Dies at 89",
+      "reference_record_count": 1
+    },
+    {
+      "title": "In HBO's 'Treme', Realism Battles Sappiness",
+      "reference_record_count": 1
+    },
+    {
+      "title": "Pokémon Journeys: The Series (TV 2019) - Anime News Network",
+      "reference_record_count": 1
+    },
+    {
+      "title": "Fitxa de doblatge de Pokémon",
+      "reference_record_count": 1
+    },
+    {
+      "title": "Pokémon (TV) - Anime News Network",
+      "reference_record_count": 1
+    },
+    {
+      "title": "Mavka: Strážkyně lesa (2022)",
+      "reference_record_count": 1
+    },
+    {
+      "title": "Mavka i strażnicy lasu",
+      "reference_record_count": 1
+    },
+    {
+      "title": "Mavka: Strážkyňa lesa (2022)",
+      "reference_record_count": 1
+    },
+    {
+      "title": "Mavka The Forest Song",
+      "reference_record_count": 1
+    },
+    {
+      "title": "Барбі",
+      "reference_record_count": 1
+    }
+  ],
+  "outputs": {
+    "source_inventory": "/home/dducky/projects/vietnam-film-network/vietnam-film-network/data/evidence_validation/v2/source_inventory.csv",
+    "source_domain_summary": "/home/dducky/projects/vietnam-film-network/vietnam-film-network/data/evidence_validation/v2/source_domain_summary.csv"
+  },
+  "important": [
+    "This is an inventory only; it does not fetch source pages.",
+    "URL availability is not proof that a source supports an edge.",
+    "P248 stated-in references and P854 URLs are kept distinct.",
+    "P143 imported-from references are not treated as independent evidence.",
+    "No edge is marked verified by this script."
+  ]
+}

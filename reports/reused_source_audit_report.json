@@ -1,0 +1,10 @@
+{
+  "total_source_tasks": 2159,
+  "unique_source_assets": 322,
+  "sources_reused_10_or_more_edges": 44,
+  "source_types": {
+    "P248_publication_item": 45,
+    "P854_reference_url": 277
+  },
+  "output": "data/evidence_validation/v2/reused_source_edge_audit.csv"
+}

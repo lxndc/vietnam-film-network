@@ -1,0 +1,7 @@
+{
+  "work_candidates": 1926,
+  "person_organization_candidates": 5847,
+  "relation_candidates": 8223,
+  "all_candidates_status": "needs_review",
+  "warning": "Candidate chưa phải Node/Edge đã xác minh và không được tính vào nghiệm thu."
+}

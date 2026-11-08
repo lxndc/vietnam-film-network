@@ -1,0 +1,40 @@
+{
+  "qid_conflicts": 688,
+  "qid_conflict_candidate_rows": 2085,
+  "unresolved_relations": 4349,
+  "unresolved_reason_counts": {
+    "unresolved_target": 3354,
+    "unresolved_work_context": 3361,
+    "unresolved_source": 1545
+  },
+  "unresolved_relationship_counts": {
+    "ACTED_IN": 1920,
+    "PRODUCED": 168,
+    "DIRECTED": 508,
+    "WROTE": 288,
+    "DISTRIBUTED_BY": 268,
+    "PRODUCED_BY": 288,
+    "COMPOSED_MUSIC_FOR": 124,
+    "EDITED": 67,
+    "CINEMATOGRAPHED": 132,
+    "BROADCAST_BY": 209,
+    "PRODUCTION_DESIGNED": 19,
+    "COSTUME_DESIGNED": 9,
+    "SOUND_DESIGNED": 14,
+    "VOICE_ACTED_IN": 152,
+    "NARRATED": 5,
+    "ASSISTANT_DIRECTED": 3,
+    "EXECUTIVE_PRODUCED": 21,
+    "OTHER_CREW_ROLE": 74,
+    "ART_DIRECTED": 2,
+    "ANIMATED": 44,
+    "STORYBOARDED": 11,
+    "RECORDED_PARTICIPANT_IN": 22,
+    "SCENOGRAPHED": 1
+  },
+  "reference_coverage": {
+    "total": 8223,
+    "with_references": 357,
+    "without_references": 7866
+  }
+}

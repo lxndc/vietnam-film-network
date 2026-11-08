@@ -1,0 +1,74 @@
+{
+  "stage": "entity_resolution_v1",
+  "generated_at": "2026-11-06T19:39:11+00:00",
+  "inputs": {
+    "work_review_rows": 1926,
+    "entity_review_rows": 5847,
+    "relation_review_rows": 8223,
+    "review_decisions": {
+      "work": {
+        "correct": 1926
+      },
+      "entity": {
+        "correct": 5847
+      },
+      "relation": {
+        "correct": 8223
+      }
+    },
+    "approved_candidates_used": {
+      "work": 1926,
+      "entity": 5847,
+      "relation": 8223
+    }
+  },
+  "node_resolution": {
+    "input_approved_candidates": 7773,
+    "canonical_nodes": 6890,
+    "nodes_by_label": {
+      "Organization": 951,
+      "Person": 4385,
+      "Work": 1554
+    },
+    "candidate_groups_merged_by_qid": 784,
+    "candidates_without_qid_kept_separate": 69,
+    "possible_duplicate_name_groups": 24,
+    "qid_type_conflicts": 688
+  },
+  "edge_resolution": {
+    "approved_relation_candidates": 8223,
+    "resolved_deduplicated_edge_candidates": 2689,
+    "unresolved_relation_candidates": 4349,
+    "candidates_without_statement_reference_urls": 3739,
+    "edges_by_relationship_type": {
+      "ACTED_IN": 1735,
+      "PRODUCED": 67,
+      "DIRECTED": 199,
+      "WROTE": 105,
+      "COMPOSED_MUSIC_FOR": 108,
+      "PRODUCED_BY": 99,
+      "DISTRIBUTED_BY": 98,
+      "BROADCAST_BY": 111,
+      "CINEMATOGRAPHED": 55,
+      "EDITED": 20,
+      "PRODUCTION_DESIGNED": 4,
+      "SOUND_DESIGNED": 3,
+      "EXECUTIVE_PRODUCED": 18,
+      "COSTUME_DESIGNED": 1,
+      "OTHER_CREW_ROLE": 13,
+      "VOICE_ACTED_IN": 48,
+      "NARRATED": 4,
+      "ART_DIRECTED": 1
+    },
+    "all_resolved_edges_need_evidence_validation": true
+  },
+  "output_directory": "data/resolution",
+  "previous_output_backup": null,
+  "important": [
+    "Exact same-type Wikidata QID is the only automatic merge key.",
+    "Candidates without QID are kept separate; same-name groups are review flags only.",
+    "Resolved edges remain needs_evidence_validation and are not production graph edges.",
+    "Wikidata item URLs are traceability links, not equivalent to statement reference URLs.",
+    "No precision claim is made by this script."
+  ]
+}
