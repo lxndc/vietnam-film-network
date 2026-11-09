@@ -1,0 +1,15 @@
+{
+  "stage": "news_v2_auto_neo4j_staging_import",
+  "status": "completed",
+  "date": "2026-11-09T19:19:46.736676+00:00",
+  "mode": "machine_screened_staging",
+  "database": "neo4j",
+  "input_nodes": 2,
+  "input_edges": 1,
+  "neo4j_auto_nodes_total": 2,
+  "neo4j_auto_edges_total": 1,
+  "wiki_data_imported": false,
+  "gold_standard_certification": false,
+  "independently_measured_precision_percent": null,
+  "warning": "Neo4j staging import is NOT an academic precision pass, and is not production acceptance."
+}

@@ -1,0 +1,24 @@
+{
+  "stage": "automated_newspaper_technical_screening_v1",
+  "created_at": "2026-11-09T19:19:46.069569+00:00",
+  "candidate_edges": 2,
+  "candidates_machine_audited": 2,
+  "machine_audit_coverage_percent": 100.0,
+  "machine_pass_assertions": 1,
+  "machine_rejected_assertions": 1,
+  "machine_screened_unique_edges": 1,
+  "machine_screened_nodes": 2,
+  "machine_populated_types": 1,
+  "reject_reasons": {
+    "speculative_evidence": 1
+  },
+  "sample_created": false,
+  "gold_sample_rows": 2,
+  "gold_standard_evaluation_status": "not_calculable",
+  "independently_measured_precision_percent": null,
+  "gold_standard_precision_above_90": null,
+  "qualified_as_verified_for_production": false,
+  "wiki_sources_used": 0,
+  "export_dir": "data/news_v2/export/auto_staging",
+  "explanation": "Full machine-check coverage and rule replay are not factual precision. Gold Standard labels were NOT populated."
+}

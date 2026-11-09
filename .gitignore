@@ -46,3 +46,19 @@ neo4j/plugins/
 
 # Wikidata raw cache
 data/raw/wikidata/work_scope_cache/
+
+# Newspaper article cache
+data/raw/news_article_cache/
+data/staging/articles/
+
+# Newspaper-first pipeline: private content remains local
+/data/news_v2/private/
+/data/news_v2/**/__pycache__/
+/.legacy_archive/
+/.backup/
+
+# Private newspaper source cache
+data/news_v2/private/
+.env
+.venv/
+.backup/
