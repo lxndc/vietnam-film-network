@@ -1,332 +1,304 @@
 # Vietnam Film Network
 
-Hệ thống thu thập, chuẩn hóa và xây dựng mạng lưới quan hệ trong lĩnh vực điện ảnh Việt Nam từ các nguồn dữ liệu công khai. Dự án áp dụng Social Network Analysis (SNA), mô hình hóa dữ liệu dưới dạng đồ thị dị thể và lưu trữ đồ thị bằng Neo4j.
+**Mạng lưới quan hệ điện ảnh Việt Nam được xây dựng từ dữ liệu báo chí bằng Python, xử lý ngôn ngữ tự nhiên và Neo4j.**
 
-> **Trạng thái dữ liệu:** README này mô tả pipeline và tiêu chí nghiệm thu. Dữ liệu ứng viên không đồng nghĩa với dữ liệu đã xác minh. Chỉ các quan hệ có bằng chứng và vượt qua quy trình kiểm định mới được đưa vào graph production.
+Dự án phục vụ học phần **Phân tích phương tiện mạng xã hội (Social Media Analytics / Social Network Analysis)**. Hệ thống thu thập bài báo từ RSS và các trang lưu trữ của cơ quan báo chí, trích xuất quan hệ giữa nhân vật, tác phẩm và tổ chức, kiểm tra bằng chứng tự động, khử trùng lặp và nhập dữ liệu vào một đồ thị Neo4j.
 
-## 1. Mục tiêu
+> **Trạng thái:** Đang phát triển và mở rộng dữ liệu (News V3 + RSS V4). Pipeline tự động hoạt động được; các chỉ tiêu nghiệm thu **chưa được chứng minh là đã đạt**. Kết quả kiểm tra tự động không phải phép đo Precision độc lập.
 
-Dự án xây dựng mạng lưới giữa cá nhân, tác phẩm điện ảnh và tổ chức có liên quan đến điện ảnh Việt Nam. Dữ liệu được thu thập từ các nguồn công khai, sau đó trải qua các bước chuẩn hóa định danh, kiểm tra phạm vi Việt Nam, xác minh bằng chứng, đánh giá độ chính xác và import vào Neo4j.
+## 1. Mục tiêu và phạm vi
 
-Các mục tiêu định lượng hiện được đặt ra:
+Đối tượng nghiên cứu gồm người tham gia sản xuất phim, tác phẩm điện ảnh/truyền hình và tổ chức liên quan đến ngành phim Việt Nam. Quan hệ chỉ được tạo khi bộ trích xuất tìm thấy phát biểu cụ thể trong nội dung bài báo đã tải, kèm nguồn và câu bằng chứng.
 
-| Tiêu chí | Ngưỡng nghiệm thu |
-|---|---:|
-| Core Nodes (`Person`, `Work`, `Organization`) | Ít nhất 4.000 |
-| Valid Edges | Ít nhất 10.000 |
-| Relationship Types có dữ liệu | Ít nhất 20 |
-| Edge Precision trên tập Gold Standard | Lớn hơn 90% |
+| Chỉ tiêu | Mục tiêu dự án |
+| --- | ---: |
+| Nút trong đồ thị | ≥ 2.200 |
+| Cạnh quan hệ | ≥ 5.500 |
+| Loại quan hệ có dữ liệu thực tế | ≥ 11 |
+| Edge Precision | > 90% khi được đánh giá bằng tập tham chiếu độc lập |
 
-Các ngưỡng trên là mục tiêu nghiệm thu, không phải số liệu đã đạt. Số lượng candidate không được tính thay cho số lượng node/edge đã xác minh.
+Các mốc trên là **mục tiêu**, không phải kết quả đã đạt. Dữ liệu Wiki/Wikidata cũ được cách ly và **không được sử dụng làm nguồn đầu vào** cho pipeline báo chí hiện tại.
 
-## 2. Mô hình dữ liệu
+### Kết quả gần nhất đã quan sát
 
-### 2.1. Node labels
+*Snapshot trước khi chạy mở rộng RSS V4, dựa trên kết quả thực nghiệm tại máy phát triển:*
 
-| Label | Nội dung |
-|---|---|
-| `Person` | Diễn viên, đạo diễn, biên kịch, nhà sản xuất, thành viên đoàn phim và cá nhân khác |
-| `Work` | Phim điện ảnh, phim truyền hình hoặc tác phẩm nghe nhìn nằm trong phạm vi nghiên cứu |
-| `Organization` | Hãng phim, đơn vị sản xuất, đài truyền hình, đơn vị phát hành và tổ chức liên quan |
+| Chỉ số | Giá trị |
+| --- | ---: |
+| URL bài báo đã phát hiện | 482 |
+| Bài báo tải nội dung thành công | 451 |
+| Quan hệ ứng viên được trích xuất | 7 |
+| Nút có trong Neo4j | 11 |
+| Cạnh có trong Neo4j | 6 |
+| Loại quan hệ có trong Neo4j | 1 (`DIRECTED`) |
 
-### 2.2. Relationships
+Đây là số liệu lịch sử, **không tự cập nhật** theo mỗi lần chạy. Số liệu mới nhất nằm trong `reports/news_v2/` và được lấy bằng các lệnh ở phần **Kiểm tra kết quả**.
 
-Các quan hệ mô tả đóng góp hoặc liên hệ giữa `Person`, `Work` và `Organization`. Một số loại quan hệ được sử dụng trong tập candidate gồm:
+## 2. Kiến trúc xử lý
 
-`ACTED_IN`, `VOICE_ACTED_IN`, `DIRECTED`, `ASSISTANT_DIRECTED`, `PRODUCED`, `EXECUTIVE_PRODUCED`, `WROTE`, `EDITED`, `CINEMATOGRAPHED`, `COMPOSED_MUSIC_FOR`, `PRODUCTION_DESIGNED`, `COSTUME_DESIGNED`, `SOUND_DESIGNED`, `ART_DIRECTED`, `ANIMATED`, `STORYBOARDED`, `NARRATED`, `DISTRIBUTED_BY`, `PRODUCED_BY`, `BROADCAST_BY`, `OTHER_CREW_ROLE`, `RECORDED_PARTICIPANT_IN`, `SCENOGRAPHED`.
+```text
+RSS / Publisher Archive / Sitemap
+             |
+             v
+  Khám phá URL và lọc chủ đề
+             |
+             v
+  Tải nội dung bài báo gốc
+             |
+             v
+  Nhận diện thực thể và quan hệ
+             |
+             v
+  Kiểm tra kỹ thuật từng assertion
+  (URL, publisher, hash, evidence, offset,
+   kiểu thực thể và tái chạy quy tắc)
+             |
+             v
+  Gộp quan hệ trùng và xuất CSV
+             |
+             v
+      Neo4j :NewsV2
+```
 
-Danh sách trên là ontology/relationship candidates đã xuất hiện trong quá trình xử lý. Một loại quan hệ chỉ được tính là **populated** khi có ít nhất một quan hệ hợp lệ, không phải chỉ vì tên loại quan hệ xuất hiện trong code hoặc schema.
+Hệ thống thực hiện các giai đoạn trên tự động, không yêu cầu nhập nhãn kiểm duyệt bằng tay để chạy pipeline. **Kiểm tra kỹ thuật 100% assertion không đồng nghĩa với độ chính xác thực tế 100% hay Precision >90%.**
 
-### 2.3. Evidence và provenance
+### Công nghệ
 
-Mỗi Edge cần giữ được khả năng truy ngược về statement và nguồn hỗ trợ. Dữ liệu nguồn được quản lý tách biệt để tránh nhầm lẫn giữa:
+- **Python 3.13**: thu thập và xử lý dữ liệu, khai thác quan hệ dựa trên mẫu câu tiếng Việt.
+- **Requests, feedparser, Beautiful Soup, trafilatura**: xử lý RSS và nội dung bài báo.
+- **CSV / JSON**: lưu dữ liệu trung gian, kết quả kiểm tra và báo cáo.
+- **Neo4j**: quản lý và truy vấn mạng lưới quan hệ.
+- **WSL2 / Ubuntu**: môi trường chạy trong quá trình phát triển.
 
-- URL hoặc publication item được ghi nhận trong dữ liệu nguồn;
-- nguồn đã truy cập được;
-- nguồn có nội dung hỗ trợ đúng Edge;
-- nguồn độc lập với các nguồn khác;
-- Edge đã được người kiểm duyệt xác nhận.
+## 3. Nguồn dữ liệu
 
-Việc một URL tồn tại hoặc một Wikidata statement có reference không tự động chứng minh Edge chính xác.
+Nguồn được quản lý tại [`config/news_sources.csv`](config/news_sources.csv). Pipeline hiện cấu hình các cơ quan báo chí như Tuổi Trẻ, Thanh Niên, VnExpress, VTV, Dân trí, Tiền Phong, Báo Văn Hóa và Báo Điện tử Chính phủ. Không phải nguồn nào cũng cung cấp RSS: một số nguồn được sử dụng qua trang lưu trữ hoặc sitemap.
 
-## 3. Pipeline xử lý
+Bản RSS V4 bổ sung các kênh chuyên mục điện ảnh, giải trí, truyền hình và hậu trường. Việc một feed có trong cấu hình **không bảo đảm** feed còn hoạt động hoặc có bài báo phù hợp. Mỗi URL được kiểm tra để bảo đảm thuộc nhà xuất bản đã khai báo; việc tải bài tuân thủ giới hạn truy cập và quy tắc của nguồn.
 
-Pipeline hiện được tổ chức theo các giai đoạn sau:
+Nguyên tắc dữ liệu:
 
-1. **Collection:** thu thập Work, Person, Organization và relationship candidates từ nguồn công khai.
-2. **Normalization:** chuẩn hóa tên, QID, loại entity và các trường dữ liệu.
-3. **Entity Resolution:** hợp nhất bản ghi cùng thực thể, giải quyết QID trùng loại và đưa trường hợp mơ hồ vào hàng đợi kiểm tra.
-4. **Vietnam Scope Audit:** phân loại tác phẩm thuộc phạm vi phim Việt Nam, đồng sản xuất hoặc ngoài phạm vi.
-5. **Source Inventory:** chuẩn hóa nguồn tham chiếu và thống kê miền nguồn.
-6. **Source Deduplication:** gom các locator trùng lặp thành Source Assets, đồng thời giữ mapping tới từng Edge/statement.
-7. **Evidence Review:** kiểm tra nguồn có truy cập được và có hỗ trợ chính xác quan hệ tương ứng hay không.
-8. **Gold Standard Evaluation:** tạo mẫu đánh giá độc lập và tính Edge Precision.
-9. **Verified Dataset:** tách Edge đã xác minh, Edge cần kiểm tra và Edge bị loại.
-10. **Graph Export:** xuất nodes, edges và evidence cho Neo4j.
-11. **Neo4j Import:** import staging để kiểm tra trước; chỉ import production khi toàn bộ tiêu chí nghiệm thu đạt.
+- Chỉ sử dụng nội dung bài báo gốc đã tải để trích xuất quan hệ; metadata RSS dùng để tìm URL, không được coi là bằng chứng xác nhận cạnh.
+- Loại URL từ Wikipedia, Wikidata và các miền Wiki liên quan khỏi pipeline News V2/V3/V4.
+- Lưu URL xuất xứ, mã bài viết, câu bằng chứng và vị trí xuất hiện trong bài.
+- Không tự tạo nút/cạnh thiếu căn cứ để đáp ứng chỉ tiêu số lượng.
+- Không đưa toàn văn bài báo lưu trong cache riêng tư lên GitHub.
 
-Không bỏ qua bước kiểm duyệt để tăng số lượng Edge hoặc làm tăng Precision trên báo cáo.
+## 4. Cài đặt
 
-## 4. Công nghệ
+### Yêu cầu
 
-- Python 3.13+ (môi trường phát triển hiện tại)
-- Neo4j 5 Community
-- Docker Desktop / Docker Compose
-- WSL2 Ubuntu (môi trường đã sử dụng trong quá trình phát triển)
-- Python packages được khai báo trong file dependency của repository (ví dụ `requirements.txt` nếu repository đang sử dụng file này)
+- Python 3.13 và `pip`.
+- Neo4j đang chạy, có thể kết nối qua Bolt.
+- Git; WSL2/Ubuntu hoặc môi trường Linux tương đương.
 
-## 5. Cấu hình môi trường
-
-### 5.1. Yêu cầu
-
-Cài đặt:
-
-- Git
-- Python 3.13 trở lên
-- Docker Desktop có tích hợp WSL2, hoặc Docker Engine và Docker Compose trên Linux
-- Neo4j 5 Community thông qua cấu hình Docker Compose của dự án
-
-### 5.2. Tạo virtual environment
-
-Từ thư mục gốc repository:
+Thực hiện từ **thư mục gốc repository**:
 
 ```bash
-python3.13 -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
+pip install -r requirements-news-v2.txt
 ```
 
-Nếu repository có `requirements.txt`:
-
-```bash
-pip install -r requirements.txt
-```
-
-### 5.3. Cấu hình biến môi trường
-
-Tạo file `.env` từ `.env.example`:
-
-```bash
-cp .env.example .env
-```
-
-Các biến kết nối Neo4j được sử dụng trong môi trường hiện tại:
+Tạo file `.env` trong thư mục gốc và điền thông tin Neo4j thực tế:
 
 ```dotenv
 NEO4J_URI=bolt://localhost:7687
 NEO4J_USER=neo4j
-NEO4J_PASSWORD=CHANGE_ME
+NEO4J_PASSWORD=YOUR_NEO4J_PASSWORD
+NEO4J_DATABASE=neo4j
 ```
 
-Thay `CHANGE_ME` bằng mật khẩu đã cấu hình cho Neo4j cục bộ. Giá trị trong `.env` phải tương ứng với cấu hình container Neo4j. **Không commit `.env` lên GitHub.**
+**Không commit `.env`, mật khẩu, dữ liệu riêng tư hoặc cache nội dung bài báo lên GitHub.**
 
-### 5.4. Khởi động Neo4j
+> Repository cần có các module `news_pipeline/unified.py`, `news_pipeline/rss_expand.py` và `news_pipeline/film_patterns_plus.py` của các bản cập nhật đã cài. Nếu các module chưa có, README không tự cài đặt chúng.
 
-Từ thư mục có file Docker Compose:
+## 5. Chạy pipeline
+
+### 5.1. Thu thập RSS, xử lý và import Neo4j bằng một lệnh
 
 ```bash
-docker compose up -d
-docker compose ps
+mkdir -p reports/news_v2
+set -o pipefail
+python -u -m news_pipeline.rss_expand run \
+  --limit 300 \
+  --delay 2 \
+  --fetch-limit 200 \
+  --fetch-batches 30 \
+  --batch-size 200 \
+  2>&1 | tee reports/news_v2/rss_v4.log
 ```
 
-Neo4j Browser mặc định trong cấu hình phát triển hiện tại:
+`--limit` giới hạn số entry đọc **trên mỗi feed**, không phải tổng URL. `--fetch-limit` là số bài được thử trong một đợt; `--fetch-batches` giới hạn số đợt tải. Dữ liệu RSS mới được lưu checkpoint sau từng feed. Dữ liệu đã có được tái sử dụng và các URL trùng được khử trùng lặp.
 
-```text
-http://localhost:7474
-```
-
-Bolt endpoint:
-
-```text
-bolt://localhost:7687
-```
-
-Không xóa Docker volume đang chứa database để xử lý lỗi xác thực. Việc xóa volume có thể làm mất dữ liệu Neo4j.
-
-## 6. Các đường dẫn dữ liệu chính
-
-Các đường dẫn dưới đây là những khu vực dữ liệu đã được sử dụng trong pipeline:
-
-```text
-scripts/
-  # Các module thu thập, resolution, evidence validation, export và import
-
-data/
-  resolution/
-    entity_resolution_v2/
-  evidence_validation/
-    v2/
-    v3_scope/
-    v3_source_dedup/
-    precision_preparation/   # Có thể chưa tồn tại ở mọi bản checkout
-  evaluation/
-    gold_standard_sample.csv
-  export/
-    verified/                # Thư mục export theo cấu hình pipeline
-
-reports/
-  # Báo cáo collection, resolution, evidence validation, evaluation và import
-```
-
-Không phải mọi thư mục đều được tạo ngay sau khi clone. Một số thư mục chỉ xuất hiện sau khi chạy module tương ứng.
-
-## 7. Các lệnh pipeline
-
-Chạy lệnh từ thư mục gốc repository, sau khi kích hoạt virtual environment và cấu hình `.env`.
-
-### 7.1. Entity Resolution
-
-Ví dụ lệnh Entity Resolution v2 đã sử dụng:
+### 5.2. Chạy lại trên dữ liệu đã tải, không thu thập RSS mới
 
 ```bash
-python -m scripts.entity_resolution \
-  --review-dir data/resolution/entity_resolution_v2_input \
-  --output-dir data/resolution/entity_resolution_v2
+python -u -m news_pipeline.unified run \
+  --discover none \
+  --skip-fetch \
+  2>&1 | tee reports/news_v2/unified.log
 ```
 
-### 7.2. Chuẩn bị và khử trùng lặp nguồn
+Lệnh này tái tạo assertion, kiểm tra bằng chứng, xuất CSV và cập nhật graph từ những bài đã có nội dung.
+
+### 5.3. Chỉ xuất dữ liệu, chưa import Neo4j
 
 ```bash
-python -m scripts.prepare_source_review
-python -m scripts.source_deduplication
+python -u -m news_pipeline.rss_expand run \
+  --limit 300 \
+  --delay 2 \
+  --fetch-limit 200 \
+  --fetch-batches 10 \
+  --no-import
 ```
 
-### 7.3. Tạo Verified Dataset và đánh giá Precision
-
-Chỉ chạy sau khi hoàn thành kiểm duyệt phạm vi Work, Source Assets, Edge–Source support và Gold Standard:
+### 5.4. Thu thập bổ sung bằng sitemap hoặc kho bài báo
 
 ```bash
-python -m scripts.build_verified_dataset
-python -m scripts.evaluate_precision
+python -u -m news_pipeline.unified run \
+  --discover both \
+  --discover-limit 1500 \
+  --max-sitemaps 10 \
+  --max-pages 10 \
+  --max-attempts 20 \
+  --fetch-limit 200 \
+  --fetch-batches 10 \
+  --delay 2
 ```
 
-Kiểm tra báo cáo:
+Các giới hạn giúp kiểm soát thời gian chạy và số lượt yêu cầu. Đối với sitemap, các trang không cho phép thu thập sẽ được bỏ qua, không tìm cách vượt hạn chế của nhà xuất bản.
 
-```bash
-python -m json.tool reports/verified_dataset_report.json
-python -m json.tool reports/evaluation_report.json
-```
+## 6. Mô hình đồ thị Neo4j
 
-### 7.4. Export và import staging
+Tất cả thực thể trong pipeline hiện tại sử dụng nhãn chung `NewsV2` và thuộc tính `dataset = 'news_v2'`.
 
-```bash
-python -m scripts.export_verified_graph
-GRAPH_IMPORT_STATUS=staging python -m scripts.neo4j_import
-```
+| Loại thực thể | Nhãn phụ trong bản import đã sửa constraint |
+| --- | --- |
+| Cá nhân | `NewsV2Person` |
+| Tác phẩm | `NewsV2Work` |
+| Tổ chức | `NewsV2Organization` |
 
-Kiểm tra báo cáo import:
+Ví dụ quan hệ: `DIRECTED`, `ACTED_IN`, `WROTE`, `PRODUCED`, `DISTRIBUTED_BY` và các loại khác được khai báo trong bộ trích xuất. **Chỉ những loại có cạnh thực tế mới được tính vào chỉ tiêu 11 loại quan hệ.**
 
-```bash
-python -m json.tool reports/neo4j_import_report.json
-```
+Importer sử dụng `MERGE` theo `NewsV2.node_id` và nhãn phụ `NewsV2*` để tránh xung đột với các ràng buộc duy nhất của `Person`/`Work` từ những đồ thị cũ. Nhãn phụ này là bản sửa đã áp dụng trên máy phát triển, không phải mặc định của mọi bản V3 trước đó.
 
-### 7.5. Production import
+### Truy vấn xác minh trên Neo4j Browser
 
-Chỉ thực hiện sau khi báo cáo evaluation xác nhận Edge Precision **lớn hơn 90%**, dữ liệu verified đạt các ngưỡng node/edge/relationship type, không còn lỗi endpoint hoặc evidence và importer chấp nhận điều kiện production:
-
-```bash
-GRAPH_IMPORT_STATUS=production python -m scripts.neo4j_import
-```
-
-Không sửa ngưỡng trong `scripts/neo4j_import.py` để bỏ qua điều kiện nghiệm thu.
-
-## 8. Kiểm tra đồ thị trong Neo4j
-
-Đếm node theo label sau khi import:
+Đếm nút:
 
 ```cypher
-MATCH (n)
-WHERE n.dataset_status = 'staging'
-RETURN labels(n) AS node_type, count(n) AS total;
+MATCH (n:NewsV2)
+WHERE n.dataset = 'news_v2'
+RETURN count(n) AS TotalNodes;
 ```
 
-Đếm relationship theo type:
+Đếm cạnh và số loại quan hệ:
 
 ```cypher
-MATCH ()-[r]->()
-WHERE r.dataset_status = 'staging'
-RETURN type(r) AS relationship_type, count(r) AS total
-ORDER BY total DESC;
+MATCH (:NewsV2)-[r]->(:NewsV2)
+WHERE r.dataset = 'news_v2'
+RETURN count(r) AS TotalEdges,
+       count(DISTINCT type(r)) AS RelationshipTypes;
 ```
 
-Kiểm tra Edge chưa verified:
+Thống kê từng loại quan hệ:
 
 ```cypher
-MATCH ()-[r]->()
-WHERE r.dataset_status = 'staging'
-  AND r.verification_status <> 'verified'
-RETURN count(r) AS unverified_edges;
+MATCH (:NewsV2)-[r]->(:NewsV2)
+WHERE r.dataset = 'news_v2'
+RETURN type(r) AS RelationshipType,
+       count(r) AS Total
+ORDER BY Total DESC;
 ```
 
-Điều chỉnh `dataset_status` trong truy vấn nếu cấu hình importer của phiên bản hiện tại sử dụng giá trị khác.
+## 7. Dữ liệu đầu ra và báo cáo
 
-## 9. Đánh giá chất lượng dữ liệu
+```text
+config/
+  news_sources.csv               # Danh mục báo và RSS/archive
+  film_keywords.txt              # Từ khóa lọc bài
+  project_targets.yaml           # Mục tiêu nghiệm thu
+news_pipeline/
+  rss_expand.py                  # Mở rộng và thu thập RSS V4
+  unified.py                     # Điều phối pipeline và import Neo4j
+  high_yield.py                  # Bộ trích xuất quan hệ
+  film_patterns_plus.py          # Các mẫu câu mở rộng
+  ...
+data/news_v2/
+  articles.csv                   # URL và metadata
+  article_documents.csv          # Trạng thái fetch
+  relation_assertions.csv        # Các assertion ứng viên
+  unified_screening.csv          # Kết quả kiểm tra từng assertion
+  private/article_text/         # Bài báo gốc: KHÔNG COMMIT
+  export/graph/
+    nodes.csv
+    edges.csv
+    edge_evidence.csv
+reports/news_v2/
+  rss_v4_collect.json
+  rss_v4_progress.json
+  unified_extraction.json
+  unified_graph.json
+  unified_neo4j.json
+  rss_v4.log
+```
 
-Edge Precision phải được đo trên Gold Standard có nhãn kiểm duyệt độc lập. Nhãn `correct` trong candidate CSV, Wikidata statement hoặc trạng thái URL hợp lệ không thay thế được việc xác minh nội dung nguồn.
+Các file `data/news_v2/` và `reports/news_v2/` được tạo hoặc cập nhật trong quá trình chạy; không nhất thiết tồn tại trong một bản clone mới.
 
-Quy tắc tối thiểu:
-
-- Mỗi Edge cần xác định đúng Person/Organization và Work endpoint.
-- Bằng chứng phải hỗ trợ đúng quan hệ và đúng tác phẩm.
-- Phân biệt nguồn gốc độc lập với bài viết sao chép hoặc đăng lại.
-- Work ngoài phạm vi nghiên cứu phải bị loại hoặc giữ ở trạng thái chưa xác định.
-- Trường hợp thiếu nguồn hoặc bằng chứng mơ hồ phải ở `needs_review`/`uncertain`, không được tự chuyển thành `verified`.
-- Gold Standard cần có người đánh giá, quyết định cuối cùng và ghi chú/bằng chứng; các nhãn chưa adjudicate không được tính là xác nhận đúng.
-
-## 10. Trạng thái dữ liệu tại lần cập nhật README
-
-Snapshot dựa trên các báo cáo đã trao đổi đến ngày **2026-11-09**:
-
-| Chỉ số | Trạng thái đã ghi nhận |
-|---|---:|
-| Edge candidates sau Entity Resolution v2 | 5.568 |
-| Edge được đánh dấu verified trong gói precision-preparation đã kiểm tra | 0 |
-| Gold Standard sample cần đánh giá | 329 |
-| Gold Standard có adjudicated label độc lập | 0 |
-| Edge Precision | Chưa tính được / chưa có cơ sở xác nhận |
-
-Đây là trạng thái của bộ dữ liệu kiểm định đã trao đổi, không phải cam kết rằng working tree hiện tại có cùng nội dung. Cần chạy lại pipeline và cập nhật báo cáo khi dữ liệu thay đổi.
-
-## 11. Cấu trúc commit và dữ liệu
-
-Nên đưa lên GitHub:
-
-- Mã nguồn `scripts/` và các module hỗ trợ.
-- Docker Compose config và file cấu hình mẫu.
-- `README.md`, tài liệu phương pháp, schema và hướng dẫn kiểm duyệt.
-- Báo cáo cần thiết để tái lập kết quả.
-- CSV/JSONL dữ liệu nghiên cứu mà nhóm có quyền chia sẻ và có kích thước phù hợp.
-
-Không đưa lên GitHub:
-
-- `.env`, mật khẩu Neo4j, API key, access token hoặc private key.
-- `.venv/`, cache, bytecode, log runtime.
-- Neo4j database files, Docker volumes hoặc bản dump chứa dữ liệu không được phép công bố.
-- Dữ liệu cá nhân hoặc nội dung nguồn có bản quyền mà nhóm không có quyền phân phối.
-
-Kiểm tra file lớn trước commit:
+Xem tiến độ:
 
 ```bash
-find . -type f -not -path './.git/*' -size +50M -printf '%s %p\n' | sort -nr
+python -m news_pipeline.rss_expand report
+python -m news_pipeline.unified status
+python -m json.tool reports/news_v2/unified_graph.json
+python -m json.tool reports/news_v2/unified_neo4j.json
 ```
 
-GitHub cảnh báo với file lớn hơn 50 MiB và chặn file lớn hơn 100 MiB trong Git thông thường. Sử dụng Git LFS cho file lớn thật sự cần version control, hoặc lưu dataset bên ngoài và ghi hướng dẫn tải trong repository.
+## 8. Kiểm định chất lượng và Precision
 
-## 12. Bảo mật và giấy phép
+Pipeline hiện tại tự động kiểm tra URL nguồn, hostname nhà xuất bản, nội dung được tải, mã SHA-256, câu bằng chứng nguyên văn, vị trí ký tự, cấu trúc thực thể, khả năng tái trích xuất và trùng lặp. Mỗi assertion nhận trạng thái `machine_pass` hoặc `rejected` cùng nguyên nhân tương ứng.
 
-- Giữ repository ở chế độ **Private** trong giai đoạn phát triển nếu chưa rà soát dữ liệu và quyền phân phối.
-- Commit `.env.example`, không commit `.env`.
-- Không commit token, mật khẩu, credential JSON, private key hoặc database password.
-- Nếu secret đã bị commit/push, cần revoke/rotate secret trước; chỉ xóa file ở commit mới không xóa secret khỏi Git history.
-- Chưa đặt giấy phép mở cho repository này. Trước khi public, cần xác định license cho code và rà soát quyền sử dụng/phân phối dữ liệu bên thứ ba.
+Đây là **machine screening**, không phải bộ Gold Standard đã được chấm độc lập. Các chỉ số `automatic_coverage_percent` hoặc `machine_pass_assertions` không thể thay thế phép đo **Edge Precision**. Báo cáo hiện tại chưa có kết quả đáng tin cậy để khẳng định Precision >90%; README không tự điền hoặc suy diễn chỉ số đó.
 
-## 13. Tài liệu tham khảo và nguồn dữ liệu
+Mục tiêu học phần chỉ được xem là đạt đầy đủ khi số nút, số cạnh, số loại quan hệ và độ chính xác được đo và chứng minh bằng phương pháp phù hợp.
 
-Dự án sử dụng dữ liệu và reference từ các nguồn công khai như Wikidata, Wikipedia và các cơ sở dữ liệu/trang thông tin điện ảnh. Mỗi bản phát hành dữ liệu nên lưu lại ngày thu thập, locator, nguồn, phương pháp xử lý và ghi chú giấy phép/điều khoản sử dụng tương ứng.
+## 9. Kiểm thử và xử lý lỗi
+
+Kiểm thử các module cập nhật:
+
+```bash
+python -m unittest discover -s tests -p 'test_unified_v3.py' -v
+python -m unittest discover -s tests -p 'test_rss_v4.py' -v
+```
+
+Nếu Neo4j chỉ có vài nút/cạnh, đối chiếu số bài và quan hệ ở từng giai đoạn thay vì import lặp lại:
+
+```bash
+python -m news_pipeline.rss_expand report
+python -m json.tool reports/news_v2/unified_extraction.json
+python -m json.tool reports/news_v2/unified_graph.json
+```
+
+Nếu gặp `ModuleNotFoundError: No module named 'news_pipeline'`, chạy từ thư mục gốc bằng `python -m news_pipeline.rss_expand ...` thay vì gọi trực tiếp file `.py` trong thư mục con.
+
+Nếu Neo4j báo uniqueness constraint khi import, kiểm tra `news_pipeline/unified.py`: `MERGE` phải xác định nút theo nhãn chung `NewsV2` và `node_id`, còn nhãn phân loại phải thuộc namespace `NewsV2*` để tránh va chạm với dữ liệu cũ. Không xóa constraint hoặc database để giải quyết lỗi này.
+
+## 10. Repository và cách đóng góp
+
+Repository: **[lxndc/vietnam-film-network](https://github.com/lxndc/vietnam-film-network)**.
+
+Chỉ đưa lên GitHub mã nguồn, cấu hình không chứa bí mật, kiểm thử, tài liệu và báo cáo tổng hợp phù hợp. Không commit `.env`, `.venv`, `.backup`, tệp văn bản báo chí đầy đủ, dữ liệu bí mật hoặc log chứa thông tin nhạy cảm.
+
+```bash
+git status --short
+git add README.md
+git diff --cached --check
+git commit -m "docs: update README for RSS V4 unified news graph"
+git push origin main
+```
 
 ---
 
-**Project:** Vietnam Film Network  
-**Purpose:** Social Network Analysis of the Vietnamese film domain  
-**Graph database:** Neo4j 5 Community  
-**Status:** Research pipeline; production acceptance depends on evidence validation and independent Precision evaluation.
+**Phạm vi hiện tại:** mạng quan hệ ngành phim Việt Nam trích xuất từ báo chí; vận hành bằng pipeline tự động và một đồ thị Neo4j. Việc tăng dữ liệu hoặc cải tiến NLP phải đi kèm bằng chứng nguồn và đánh giá chất lượng, không được thay bằng số liệu tự tạo.
