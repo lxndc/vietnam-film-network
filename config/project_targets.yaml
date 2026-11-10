@@ -1,0 +1,16 @@
+project:
+  name: Vietnam Film Network
+  collection_mode: newspaper_first
+  disable_wikipedia_seed_collection: true
+  disable_wikidata_edge_collection: true
+
+acceptance:
+  minimum_verified_core_nodes: 2200
+  minimum_verified_edges: 5500
+  minimum_populated_relationship_types: 11
+  edge_precision_percent_exclusive_min: 90
+
+baseline_inferred_from_previous_doubled_targets:
+  core_nodes: 2000
+  valid_edges: 5000
+  populated_relationship_types: 10

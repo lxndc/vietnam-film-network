@@ -1,0 +1,25 @@
+﻿outlet_id,outlet_name,base_url,source_kind,rss_or_archive_url,section_scope,source_tier,discovery_method,attribution_or_terms_note,active
+TT,Tuổi Trẻ Online,https://tuoitre.vn,rss,https://tuoitre.vn/giai-tri.rss,Giải trí; lọc bài Điện ảnh,A,Official RSS then original article,RSS terms request clear attribution; review current terms before use,true
+TN,Báo Thanh Niên,https://thanhnien.vn,rss,https://thanhnien.vn/rss/giai-tri/phim.rss,Giải trí / Phim,A,Official RSS then original article,"When reusing, attribute as Báo Thanh Niên / Theo Báo Thanh Niên",true
+VNE,VnExpress,https://vnexpress.net,rss,https://vnexpress.net/rss/giai-tri.rss,Giải trí; lọc bài Điện ảnh,A,Official RSS then original article,RSS terms request clear attribution; review current terms before use,true
+VTV,Báo điện tử VTV,https://vtv.vn,rss,https://vtv.vn/rss/van-hoa-giai-tri/dien-anh.rss,Văn hóa - Giải trí / Điện ảnh,A,Official RSS then original article,Attribute VTV; review current terms before use,true
+BVH,Báo Văn Hóa,https://baovanhoa.vn,archive,https://baovanhoa.vn/dien-anh/,Điện ảnh,B,Topic archive/site search; not RSS,Check terms and robots before crawling,true
+BCP,Báo Điện tử Chính phủ,https://baochinhphu.vn,archive,https://baochinhphu.vn/dien-anh-viet-nam.html,Chuyên đề Điện ảnh Việt Nam,B,Topic archive/site search; not RSS,Use as news/corroboration source; check terms,true
+TN,Báo Thanh Niên,https://thanhnien.vn,rss,https://thanhnien.vn/rss/giai-tri/truyen-hinh.rss,Truyền hình,A,Official RSS,Check terms and cite publisher,true
+TN,Báo Thanh Niên,https://thanhnien.vn,rss,https://thanhnien.vn/rss/giai-tri/doi-nghe-si.rss,Đời nghệ sĩ,A,Official RSS,Check terms and cite publisher,true
+VTV,Báo điện tử VTV,https://vtv.vn,rss,https://vtv.vn/rss/truyen-hinh/phim-vtv.rss,Phim VTV,A,Official RSS,Check terms and cite publisher,true
+VTV,Báo điện tử VTV,https://vtv.vn,rss,https://vtv.vn/rss/truyen-hinh/hau-truong.rss,Hậu trường,A,Official RSS,Check terms and cite publisher,true
+TN,Báo Thanh Niên,https://thanhnien.vn,rss,https://thanhnien.vn/rss/giai-tri.rss,Giải trí; lọc phim,A,Official RSS,Attribute publisher; review site terms,true
+VTV,Báo điện tử VTV,https://vtv.vn,rss,https://vtv.vn/rss/truyen-hinh/nhan-vat.rss,Truyền hình / Nhân vật; lọc phim,A,Official RSS,Attribute VTV; review site terms,true
+DTR,Báo Dân trí,https://dantri.com.vn,rss,https://dantri.com.vn/rss/giai-tri.rss,Giải trí - Điện ảnh,A,Official publisher RSS; original article body only,Attribute publisher and respect robots and reuse policy,true
+TP,Báo Tiền Phong,https://tienphong.vn,rss,https://tienphong.vn/rss/phim-anh-35.rss,Giải trí / Phim ảnh,A,Publisher RSS directory; article fetched from publisher,"Respect robots, RSS terms, copyright and source attribution",true
+TP,Báo Tiền Phong,https://tienphong.vn,rss,https://tienphong.vn/rss/giai-tri-36.rss,Giải trí,A,Publisher RSS directory; article fetched from publisher,"Respect robots, RSS terms, copyright and source attribution",true
+TP,Báo Tiền Phong,https://tienphong.vn,rss,https://tienphong.vn/rss/giai-tri-hau-truong-168.rss,Hậu trường sao,A,Publisher RSS directory; article fetched from publisher,"Respect robots, RSS terms, copyright and source attribution",true
+TT,Tuổi Trẻ Online,https://tuoitre.vn,rss,https://tuoitre.vn/van-hoa.rss,Văn hóa,A,Publisher RSS directory; article fetched from publisher,"Respect robots, RSS terms, copyright and source attribution",true
+VTV,Báo điện tử VTV,https://vtv.vn,rss,https://vtv.vn/rss/truyen-hinh.rss,Truyền hình,A,Publisher RSS directory; article fetched from publisher,"Respect robots, RSS terms, copyright and source attribution",true
+VTV,Báo điện tử VTV,https://vtv.vn,rss,https://vtv.vn/rss/truyen-hinh/goc-khan-gia.rss,Truyền hình / Góc khán giả,A,Publisher RSS directory; article fetched from publisher,"Respect robots, RSS terms, copyright and source attribution",true
+VTV,Báo điện tử VTV,https://vtv.vn,rss,https://vtv.vn/rss/van-hoa-giai-tri.rss,Văn hóa - Giải trí,A,Publisher RSS directory; article fetched from publisher,"Respect robots, RSS terms, copyright and source attribution",true
+VTV,Báo điện tử VTV,https://vtv.vn,rss,https://vtv.vn/rss/van-hoa-giai-tri/sao.rss,Sao,A,Publisher RSS directory; article fetched from publisher,"Respect robots, RSS terms, copyright and source attribution",true
+TN,Báo Thanh Niên,https://thanhnien.vn,rss,https://thanhnien.vn/rss/video/giai-tri.rss,Video / Giải trí,A,Publisher RSS directory; article fetched from publisher,"Respect robots, RSS terms, copyright and source attribution",true
+TN,Báo Thanh Niên,https://thanhnien.vn,rss,https://thanhnien.vn/rss/video/phim-ngan-vietnamese.rss,Video / Phim ngắn Vietnamese,A,Publisher RSS directory; article fetched from publisher,"Respect robots, RSS terms, copyright and source attribution",true
+TN,Báo Thanh Niên,https://thanhnien.vn,rss,https://thanhnien.vn/rss/podcast/showbiz.rss,Podcast / Showbiz,A,Publisher RSS directory; article fetched from publisher,"Respect robots, RSS terms, copyright and source attribution",true
