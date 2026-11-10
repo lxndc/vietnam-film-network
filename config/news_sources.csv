@@ -1,4 +1,4 @@
-﻿outlet_id,outlet_name,base_url,source_kind,rss_or_archive_url,section_scope,source_tier,discovery_method,attribution_or_terms_note,active
+outlet_id,outlet_name,base_url,source_kind,rss_or_archive_url,section_scope,source_tier,discovery_method,attribution_or_terms_note,active
 TT,Tuổi Trẻ Online,https://tuoitre.vn,rss,https://tuoitre.vn/giai-tri.rss,Giải trí; lọc bài Điện ảnh,A,Official RSS then original article,RSS terms request clear attribution; review current terms before use,true
 TN,Báo Thanh Niên,https://thanhnien.vn,rss,https://thanhnien.vn/rss/giai-tri/phim.rss,Giải trí / Phim,A,Official RSS then original article,"When reusing, attribute as Báo Thanh Niên / Theo Báo Thanh Niên",true
 VNE,VnExpress,https://vnexpress.net,rss,https://vnexpress.net/rss/giai-tri.rss,Giải trí; lọc bài Điện ảnh,A,Official RSS then original article,RSS terms request clear attribution; review current terms before use,true
