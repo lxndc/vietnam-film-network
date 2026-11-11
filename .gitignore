@@ -62,3 +62,6 @@ data/news_v2/private/
 .env
 .venv/
 .backup/
+
+# Incremental crawl state (local checkpoint)
+data/news_v2/state/

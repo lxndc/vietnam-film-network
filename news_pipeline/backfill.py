@@ -9,6 +9,7 @@ from __future__ import annotations
 import calendar
 import gzip
 import hashlib
+import json
 import re
 import time
 import xml.etree.ElementTree as ET
@@ -24,6 +25,51 @@ from .collect import ARTICLE_FIELDS, clean, keywords
 from .common import (NEWS_DATA, USER_AGENT, csv_read, csv_write, id_for,
                      json_report, now, prepare, require_news_url, sources)
 from .fetch import load_robots
+
+
+
+# Persistent same-publisher sitemap traversal across bounded runs.
+# Only discovery indices are saved; no relationship claims or review labels.
+def _vfn_frontier_path(outlet_id: str):
+    if not re.fullmatch(r"[A-Za-z0-9_-]{1,32}", outlet_id):
+        raise ValueError("Invalid outlet id for sitemap frontier")
+    return NEWS_DATA / "state" / ("sitemap_frontier_" + outlet_id + ".json")
+
+def _vfn_load_sitemap_frontier(outlet_id: str, seeds: list[str]):
+    from collections import deque
+    path = _vfn_frontier_path(outlet_id)
+    if path.is_symlink():
+        raise ValueError("Refusing symlinked sitemap frontier")
+    if path.is_file():
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        if payload.get("version") != 1 or payload.get("outlet_id") != outlet_id:
+            raise ValueError("Incompatible saved sitemap frontier")
+        pending = deque(payload.get("pending", []))
+        seen = set(payload.get("seen", []))
+        # Include newly advertised sitemap seed URLs but do not restart the queue.
+        for seed in seeds:
+            if seed not in seen and seed not in pending:
+                pending.append(seed)
+        if not pending:
+            # A completed index may receive new articles later; revisit seeds
+            # on the next run, without exhausting the same prefix each round.
+            pending = deque(seeds)
+            seen = set()
+    else:
+        pending = deque(seeds)
+        seen = set()
+    return pending, seen
+
+def _vfn_save_sitemap_frontier(outlet_id: str, pending, seen):
+    path = _vfn_frontier_path(outlet_id)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if path.is_symlink():
+        raise ValueError("Refusing symlinked sitemap frontier")
+    payload = {"version": 1, "outlet_id": outlet_id,
+               "pending": list(pending), "seen": sorted(seen)}
+    tmp = path.with_suffix(".tmp")
+    tmp.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+    tmp.replace(path)
 
 MAX_RESPONSE = 4_000_000
 SITEMAP_MAX_UNCOMPRESSED = 8_000_000
@@ -169,6 +215,7 @@ def backfill(args) -> dict:
     robots_cache = {}
     discovered = 0
     attempts = 0
+    frontier_states = {}
     interrupted = False
     status = "in_progress"
     max_attempts = getattr(args, "max_sitemap_attempts", 60)
@@ -176,6 +223,8 @@ def backfill(args) -> dict:
         raise ValueError("--max-sitemap-attempts must be >=1")
 
     def save_checkpoint():
+        for outlet, state in frontier_states.items():
+            _vfn_save_sitemap_frontier(outlet, state[0], state[1])
         # csv_write uses an atomic temp-file replacement; a repeat run can resume
         # without producing duplicate article IDs.
         csv_write(path, sorted(existing.values(), key=lambda r: r["article_id"]), ARTICLE_FIELDS)
@@ -255,8 +304,8 @@ def backfill(args) -> dict:
                 if not seeds:
                     report["errors"].append("No publisher sitemap seeds available from robots.txt")
                     print(f"[{src['outlet_id']}] no sitemap seeds from robots.txt; skipped", flush=True)
-                pending = deque(seeds)
-                seen = set()
+                pending, seen = _vfn_load_sitemap_frontier(src["outlet_id"], seeds)
+                frontier_states[src["outlet_id"]] = (pending, seen)
                 while (pending and report["index_pages_read"] < args.max_sitemaps
                        and report["sitemap_attempted"] < max_attempts
                        and discovered < args.limit):
